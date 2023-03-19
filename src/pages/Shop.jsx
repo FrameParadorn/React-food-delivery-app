@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Helmet from "../components/Helmet/Helmet";
 import CommonSection from "../components/UI/common-section/CommonSection";
 
@@ -7,14 +7,26 @@ import { Container, Row, Col } from "reactstrap";
 import products from "../assets/fake-data/products";
 import ProductCard from "../components/UI/product-card/ProductCard";
 import ReactPaginate from "react-paginate";
+import { useParams } from "react-router-dom";
+
 
 import "../styles/all-foods.css";
 import "../styles/pagination.css";
 
+import shopData from "../assets/fake-data/shops.js";
+
 const AllFoods = () => {
   const [searchTerm, setSearchTerm] = useState("");
-
   const [pageNumber, setPageNumber] = useState(0);
+
+  const [shop, setShop] = useState(null)
+
+  let {id: shopId} = useParams()
+
+  useEffect(() => {
+    setShop(shopData.find(d => d.id = shopId))
+  }, [])
+  
 
   const searchedProduct = products.filter((item) => {
     if (searchTerm.value === "") {
@@ -40,9 +52,11 @@ const AllFoods = () => {
     setPageNumber(selected);
   };
 
+  
+
   return (
-    <Helmet title="All-Foods">
-      <CommonSection title="All Foods" />
+    <Helmet title="Shop">
+      <CommonSection title={( shop?.title || "" )} />
 
       <section>
         <Container>
@@ -56,7 +70,7 @@ const AllFoods = () => {
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
                 <span>
-                  <i class="ri-search-line"></i>
+                  <i className="ri-search-line"></i>
                 </span>
               </div>
             </Col>

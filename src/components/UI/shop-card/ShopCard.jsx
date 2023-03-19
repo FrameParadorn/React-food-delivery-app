@@ -4,23 +4,9 @@ import "../../../styles/product-card.css";
 
 import { Link } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
-import { cartActions } from "../../../store/shopping-cart/cartSlice";
-
 const ShopCard = (props) => {
-  const { id, title, profile_image, price } = props.item;
-  const dispatch = useDispatch();
+  const { id, title, profile_image } = props.item;
 
-  const addToCart = () => {
-    dispatch(
-      cartActions.addItem({
-        id,
-        title,
-        profile_image,
-        price,
-      })
-    );
-  };
 
   return (
     <div className="product__item">
@@ -32,11 +18,13 @@ const ShopCard = (props) => {
         <h5>
           <Link to={`/foods/${id}`}>{title}</Link>
         </h5>
-        <div className=" d-flex align-items-center justify-content-between ">
-          <button className="addTOCart__btn" style={{ width: "100%"}} onClick={addToCart}>
-            เลือก
-          </button>
-        </div>
+          <Link to={`/shop/${id}`}>
+            <div className=" d-flex align-items-center justify-content-between ">
+                <button className="addTOCart__btn" style={{ width: "100%"}}>
+                  เลือก
+                </button>
+            </div>
+          </Link>
       </div>
     </div>
   );

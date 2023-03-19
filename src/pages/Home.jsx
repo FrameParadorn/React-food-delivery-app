@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 
 import Helmet from "../components/Helmet/Helmet.js";
-import { Container, Row, Col, ListGroup, ListGroupItem } from "reactstrap";
+import { Container, Row, Col } from "reactstrap";
 
 import "../styles/hero-section.css";
 
-import { Link } from "react-router-dom";
 
 
 import "../styles/home.css";
